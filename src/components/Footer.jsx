@@ -2,12 +2,12 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-700 text-gray-200 py-10">
+    <footer className="border text-gray-700 py-10">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
         
         {/* Company Info */}
         <div>
-          <h3 className="text-xl font-semibold mb-4">YourCompany</h3>
+          <h3 className="text-xl font-bold mb-4">Nayaab enterprises</h3>
           <p className="text-sm">
             Delivering quality products right to your doorstep. Trusted by thousands.
           </p>

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 const RightBar = () => {
     const router = useRouter()
     return (
-        <div className="w-full md:w-1/4 p-4 md:p-6 bg-white text-gray-800 transition-all duration-300 ease-in-out hover:shadow-lg">
+        <div className="hidden lg:block w-full md:w-1/4 p-4 md:p-6 bg-white text-gray-800 transition-all duration-300 ease-in-out hover:shadow-lg">
 
             {/* 👉 Small screens: Minimal version */}
             <div className="block md:hidden text-center">

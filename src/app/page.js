@@ -10,7 +10,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <div className="flex flex-col md:flex-row gap-4 mx-3 my-2">
+            <div className="flex flex-col lg:flex-row gap-2 mx-3 my-2">
                 <LeftBar />
                 <hr />
                 <Carousel1 />

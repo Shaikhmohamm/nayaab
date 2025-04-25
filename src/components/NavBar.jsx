@@ -49,28 +49,28 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="hidden md:block sw-full bg-black text-white shadow-lg">
+    <nav className="hidden md:block sw-full border-b border-gray-400 rounded-full mx-8 my-5 p-2 bg-gray-300">
       <div className="flex items-center justify-between px-6 py-1 md:px-10">
         {/* Logo */}
         <div className="flex items-center">
-          <Image src={logo} alt="Nayaab Enterprises Logo" width={30} height={50} className="mr-4" />
+          <Image
+            src={logo}
+            alt="Nayaab Enterprises Logo"
+            width={40}
+            height={40}
+            className="mr-4 rounded-full shadow-md hover:scale-105 transition-transform duration-300"
+          />
+          <p className="text-lg font-extrabold font-serif text-gray-800 tracking-wide hover:text-yellow-500 transition-colors duration-300">
+            Nayaab
+          </p>
         </div>
 
-        {/* Mobile Menu Button */}
-        {/* <button 
-          className="md:hidden text-2xl p-1" 
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <FiMenu />
-        </button> */}
-
-        {/* Navigation Links */}
-        <ul className={`absolute md:static left-0 top-16 w-full md:w-auto bg-gray-900 md:bg-transparent md:flex space-x-6 md:space-x-6 ${menuOpen ? "block" : "hidden"}`}>
+        <ul className={`absolute md:static left-0 top-16 w-full md:w-auto md:flex space-x-6 md:space-x-6 ${menuOpen ? "block" : "hidden"}`}>
           {["Home", "About", "Product"].map((item, index) => (
             <li key={index} className="border-b md:border-none">
-              <Link 
+              <Link
                 href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                className="block px-6 py-1 text-md font-medium text-white transition-all duration-300 ease-in-out rounded-lg hover:bg-gray-800 md:hover:bg-transparent md:hover:text-yellow-400"
+                className="font-serif block px-6 py-1 text-md font-medium transition-all duration-300 rounded-md"
               >
                 {item}
               </Link>
@@ -80,16 +80,16 @@ const NavBar = () => {
 
         {/* Search & User Authentication */}
         <div className="hidden md:flex space-x-6 items-center">
-          <button className="text-2xl p-2 rounded-lg hover:bg-gray-800 transition">
+          <button className="text-2xl p-2 rounded-lg hover:text-white transition">
             <FiSearch />
           </button>
 
           {!loading && user && (
             <div className="flex items-center space-x-4">
               <span className="text-lg font-medium">Welcome, {user.fullName}!</span>
-              <button 
-                onClick={handleLogout} 
-                className="text-2xl p-2 rounded-lg hover:bg-gray-800 transition"
+              <button
+                onClick={handleLogout}
+                className="text-2xl p-2 rounded-lg hover:text-white transition"
               >
                 <FiLogOut />
               </button>
@@ -98,7 +98,7 @@ const NavBar = () => {
 
           {!loading && !user && (
             <Link href="/register">
-              <button className="text-2xl p-2 rounded-lg hover:bg-gray-800 transition">
+              <button className="text-2xl p-2 rounded-lg hover:text-white transition">
                 <FiUser />
               </button>
             </Link>
