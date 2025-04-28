@@ -24,13 +24,13 @@ const Bestseller = () => {
 
   return (
     <section className="md:py-12 px-4 sm:px-8 lg:px-16">
-      <h2 className="text-3xl font-bold mb-8 ml-2">Bestsellers</h2>
+      <h2 className="text-3xl font-bold mb-2 md:mb-8 md:ml-2">Bestsellers</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 items-center">
+      <div className="flex flex-row gap-6 overflow-x-auto md:grid md:grid-cols-3 xl:grid-cols-4 items-center">
         {bestsellers.map((product) => (
           <Card
             key={product._id}
-            className="rounded-2xl hover:border-white hover:shadow-xl transition duration-300"
+            className="rounded-2xl min-w-[240px] hover:border-white hover:shadow-xl transition duration-300"
           >
             <CardHeader className="p-1">
               <div className="relative w-full h-64 rounded-lg overflow-hidden mx-auto">
@@ -59,6 +59,7 @@ const Bestseller = () => {
           </Card>
         ))}
       </div>
+
     </section>
   );
 };

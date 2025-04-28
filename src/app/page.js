@@ -16,7 +16,6 @@ const HomePage = () => {
                 <Carousel1 />
                 <hr />
                 <RightBar />
-                <hr />
             </div>
 
             <div>
