@@ -13,21 +13,21 @@ const carouselImages = ["/neon.jpg", "/sign.jpg", "/gift2.jpg"];
 const Carousel1 = () => {
   return (
     <div className="w-full md:w-[60%] mx-auto">
-      <Carousel plugins={[Autoplay({ delay: 3000 })]}>
-        <CarouselContent className="transition-transform duration-500 ease-in-out will-change-transform">
+      <Carousel
+        plugins={[Autoplay({ delay: 3000 })]}
+        className="overflow-hidden rounded-none md:rounded-2xl"
+      >
+        <CarouselContent className="transition-transform duration-700 ease-in-out">
           {carouselImages.map((image, index) => (
-            <CarouselItem key={index}>
-              <div className="w-full h-[220px] sm:h-[300px] md:h-[400px] bg-gray-100 flex items-center justify-center overflow-hidden rounded-none md:rounded-2xl">
-                <div className="w-full h-full relative">
-                  <Image
-                    src={image}
-                    alt={`Slide ${index + 1}`}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              </div>
+            <CarouselItem key={index} className="relative h-[220px] sm:h-[300px] md:h-[400px]">
+              <Image
+                src={image}
+                alt={`Slide ${index + 1}`}
+                fill
+                sizes="100vw"
+                className="object-cover"
+                priority
+              />
             </CarouselItem>
           ))}
         </CarouselContent>

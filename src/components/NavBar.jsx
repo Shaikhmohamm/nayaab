@@ -49,7 +49,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="hidden md:block sw-full border-b border-gray-400 rounded-full mx-8 my-5 p-2 bg-gray-300">
+    <nav className="hidden md:block border-b border-gray-400 rounded-full mx-8 my-5 p-2 bg-gray-300">
       <div className="flex items-center justify-between px-6 py-1 md:px-10">
         {/* Logo */}
         <div className="flex items-center">
@@ -60,8 +60,8 @@ const NavBar = () => {
             height={40}
             className="mr-4 rounded-full shadow-md hover:scale-105 transition-transform duration-300"
           />
-          <p className="text-lg font-extrabold font-serif text-gray-800 tracking-wide hover:text-yellow-500 transition-colors duration-300">
-            Nayaab
+          <p className="text-sm font-extrabold font-serif text-sky-950 tracking-wide hover:text-purple-500 transition-colors duration-300">
+            Nayaab.in
           </p>
         </div>
 
@@ -70,7 +70,7 @@ const NavBar = () => {
             <li key={index} className="border-b md:border-none">
               <Link
                 href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                className="font-serif block px-6 py-1 text-md font-medium transition-all duration-300 rounded-md"
+                className="font-serif text-sky-950 block px-6 py-1 text-sm font-medium transition-all duration-300 rounded-md"
               >
                 {item}
               </Link>
@@ -80,9 +80,16 @@ const NavBar = () => {
 
         {/* Search & User Authentication */}
         <div className="hidden md:flex space-x-6 items-center">
-          <button className="text-2xl p-2 rounded-lg hover:text-white transition">
-            <FiSearch />
-          </button>
+          <div className="relative w-52 transition-all duration-300 ease-in-out">
+            <input
+              type="text"
+              placeholder="Search for products..."
+              className="w-full pl-10 pr-4 py-2 bg-white text-sm text-gray-700 placeholder-gray-500 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 shadow-sm"
+            />
+            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg" />
+          </div>
+
+
 
           {!loading && user && (
             <div className="flex items-center space-x-4">
@@ -97,9 +104,9 @@ const NavBar = () => {
           )}
 
           {!loading && !user && (
-            <Link href="/register">
-              <button className="text-2xl p-2 rounded-lg hover:text-white transition">
-                <FiUser />
+            <Link href="/login">
+              <button className="bg-white text-sm font-serif py-2 px-5 rounded-full transition duration-500 ease-in-out hover:bg-sky-950 hover:text-white">
+                Login
               </button>
             </Link>
           )}
