@@ -12,7 +12,7 @@ const carouselImages = ["/neon.jpg", "/sign.jpg", "/gift2.jpg"];
 
 const Carousel1 = () => {
   return (
-    <div className="w-full md:w-[60%] mx-auto">
+    <div className="w-full md:w-[60%] mx-auto mt-2">
       <h2 className="text-3xl font-bold mb-2 ">Our expertise</h2>
       <Carousel
         plugins={[Autoplay({ delay: 3000 })]}
