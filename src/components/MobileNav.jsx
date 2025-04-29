@@ -98,7 +98,7 @@ const MobileNav = () => {
         <input
           type="text"
           placeholder="Search..."
-          className="w-3/4 p-2 border-2 border-gray-300 rounded-l-xl focus:outline-none focus:border-purple-500 transition-all duration-200"
+          className="h-10 w-3/4 p-2 border-2 border-gray-300 rounded-l-xl focus:outline-none focus:border-purple-500 transition-all duration-200"
         />
         <button className="font-serif text-sm p-2 bg-purple-950 hover:bg-purple-700 text-white rounded-r-xl transition-all duration-200">
           Search

@@ -9,7 +9,7 @@ import RightBar from "@/components/RightBar";
 const HomePage = () => {
 
     return (
-        <div>
+        <div className="">
             <div className="flex flex-col lg:flex-row gap-2 mx-3 my-2">
                 <LeftBar />
                 <hr />

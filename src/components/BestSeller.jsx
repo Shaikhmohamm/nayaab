@@ -24,7 +24,7 @@ const Bestseller = () => {
 
   return (
     <section className="md:py-12 px-4 sm:px-8 lg:px-16">
-      <h2 className="text-3xl font-bold mb-2 md:mb-8 md:ml-2">Bestsellers</h2>
+      <h2 className="font-serif text-2xl font-semibold mb-2 md:mb-8 md:ml-2">Bestsellers</h2>
 
       <div className="flex flex-row gap-6 overflow-x-auto md:grid md:grid-cols-3 xl:grid-cols-4 items-center">
         {bestsellers.map((product) => (
@@ -33,7 +33,7 @@ const Bestseller = () => {
             className="rounded-2xl min-w-[240px] hover:border-white hover:shadow-xl transition duration-300"
           >
             <CardHeader className="p-1">
-              <div className="relative w-full h-64 rounded-lg overflow-hidden mx-auto">
+              <div className="relative w-full h-48 md:h-64 rounded-lg overflow-hidden mx-auto">
                 <Image
                   src={product.images[0] || "/placeholder.jpg"}
                   alt={product.name}
@@ -47,11 +47,11 @@ const Bestseller = () => {
             </CardHeader>
 
             <CardContent className="px-4 pb-3 text-center">
-              <p className="text-sm text-gray-300 mb-3 line-clamp-2">
+              <p className="text-sm text-gray-500 mb-3 line-clamp-2">
                 {product.description}
               </p>
               <div className="flex justify-center items-center text-sm font-medium text-gray-200">
-                <span className="text-green-400 font-bold text-center">
+                <span className="text-green-700 font-bold text-center">
                   ₹{product.price}
                 </span>
               </div>
