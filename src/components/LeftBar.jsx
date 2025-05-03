@@ -2,14 +2,14 @@ import React from 'react';
 
 const LeftBar = () => {
   return (
-    <div className="w-full lg:w-1/4 p-4 md:p-6 bg-white md:mb-0">
+    <div className="hidden lg:block w-full lg:w-1/4 p-4 md:p-6 bg-white md:mb-0">
       
       {/* 👉 Small screens: Scrolling bar */}
-      <div className="block lg:hidden overflow-hidden whitespace-nowrap">
+      {/* <div className="block lg:hidden overflow-hidden whitespace-nowrap">
         <div className="animate-marquee text-gray-500 font-semibold text-sm inline-block">
           Welcome to Nayaab Enterprises | 🚀 Empowering ethical businesses | ✨ Zero-interest financial help | 💡 Startup support | 🔧 Branding tools | 🌱 Connect to grow...
         </div>
-      </div>
+      </div> */}
 
       {/* 👉 Large screens: Full content */}
       <div className="hidden lg:block"> 

@@ -22,7 +22,7 @@ const MobileNav = () => {
   }, [menuOpen]);
 
   return (
-    <>
+    <div className="bg-gray-300 p-1">
       {/* Top Mobile Nav */}
       <div className="block md:hidden w-full bg-gray-300 text-black flex justify-between items-center px-4 py-3 z-40 relative">
         {/* Left: Logo + Icons */}
@@ -94,7 +94,7 @@ const MobileNav = () => {
           onClick={() => setMenuOpen(false)}
         ></div>
       )}
-      <div className="flex justify-center items-center gap-2 mt-2">
+      <div className="flex justify-center items-center gap-2 my-5 md:mt-1">
         <input
           type="text"
           placeholder="Search..."
@@ -104,8 +104,7 @@ const MobileNav = () => {
           Search
         </button>
       </div>
-
-    </>
+    </div>
   );
 };
 

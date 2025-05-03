@@ -12,9 +12,7 @@ const HomePage = () => {
         <div className="">
             <div className="flex flex-col lg:flex-row gap-2 mx-3 my-2">
                 <LeftBar />
-                <hr />
                 <Carousel1 />
-                <hr />
                 <RightBar />
             </div>
 

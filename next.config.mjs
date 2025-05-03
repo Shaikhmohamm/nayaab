@@ -6,7 +6,8 @@ const nextConfig = {
       "images-na.ssl-images-amazon.com",
       "cdna.lystit.com",
       "m.media-amazon.com", // 👈 this one is important
-      "diamondweddingcards.com"
+      "diamondweddingcards.com",
+      "res.cloudinary.com"
     ],
   },
 };
