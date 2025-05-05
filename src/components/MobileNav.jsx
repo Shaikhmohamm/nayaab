@@ -22,20 +22,19 @@ const MobileNav = () => {
   }, [menuOpen]);
 
   return (
-    <div className="bg-gray-400">
-      <div className="bg-white flex justify-between items-center px-4 py-1 font-serif shadow-md">
-        <Link href="/" className="text-lg font-bold tracking-wide hover:scale-105 transition-transform duration-200">
+    <div className="">
+      <div className="block md:hidden bg-blue-950 flex justify-between items-center px-4 py-1 font-serif shadow-md">
+        <Link href="/" className="text-white text-md font-bold tracking-wide hover:scale-105 transition-transform duration-200">
           Nayaab.in
         </Link>
-
         <Link href="/login">
-          <button className="text-blue-400">
+          <button className="text-white border border-white p-2 rounded-lg">
             Login
           </button>
         </Link>
       </div>
       {/* Top Mobile Nav */}
-      <div className="mt-1 block md:hidden w-full text-black flex justify-between items-center px-4 py-1 z-40 relative">
+      <div className="mt-3 block md:hidden w-full text-black flex justify-between items-center px-4 py-1 z-40 relative">
         {/* Left: Logo + Icons */}
         <div className="flex justify-between items-center gap-4 w-[71%]">
           <Image
@@ -105,13 +104,13 @@ const MobileNav = () => {
           onClick={() => setMenuOpen(false)}
         ></div>
       )}
-      <div className="p-2 flex justify-center items-center gap-2 my-2 md:mt-1">
+      <div className="block md:hidden p-2 flex justify-center items-center gap-2 md:mt-1">
         <input
           type="text"
           placeholder="Search..."
           className="h-10 w-3/4 p-2 border-2 border-gray-300 rounded-l-xl focus:outline-none focus:border-purple-500 transition-all duration-200"
         />
-        <button className="font-serif text-sm p-2 bg-purple-950 hover:bg-purple-700 text-white rounded-r-xl transition-all duration-200">
+        <button className="font-serif text-sm p-2 bg-blue-950 text-white rounded-r-xl transition-all duration-200">
           Search
         </button>
       </div>

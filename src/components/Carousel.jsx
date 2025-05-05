@@ -31,7 +31,6 @@ const Carousel1 = () => {
 
   return (
     <div className="w-full md:w-[60%] mx-auto mt-2">
-      <h2 className="block md:hidden text-2xl font-semibold mb-2 font-serif">Our expertise</h2>
       <Carousel
         plugins={[Autoplay({ delay: 3000 })]}
         className="overflow-hidden rounded-none md:rounded-2xl"
