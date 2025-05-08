@@ -22,14 +22,22 @@ const NavBar = () => {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/me`, {
           withCredentials: true,
         });
-        console.log(response.data)
-        setUser(response.data.user);
+    
+        const fetchedUser = response.data.user;
+        setUser(fetchedUser);
+    
+        if (fetchedUser.role === "admin" && !fetchedUser.isVerified) {
+          // router.push("/access-denied");
+
+        }
+    
       } catch (error) {
         setUser(null);
       } finally {
         setLoading(false);
       }
     };
+    
 
     fetchUser();
   }, []);
@@ -82,7 +90,7 @@ const NavBar = () => {
         <div className="hidden md:flex space-x-6 items-center">
           {!loading && user && (
             <div className="flex items-center space-x-4">
-              <span className="text-lg font-medium">Welcome, {user.fullName}!</span>
+              <span className="text-lg font-medium">Welcome, {user.role}!</span>
               <button
                 onClick={handleLogout}
                 className="text-2xl p-2 rounded-lg hover:text-white transition"

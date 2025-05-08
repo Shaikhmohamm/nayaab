@@ -25,14 +25,20 @@ const Login = () => {
       );
 
       const { message, user } = response.data;
-
+      
+      
       toast.success(message || "Login successful! 🎉");
+      console.log(user)
 
       setTimeout(() => {
         // Redirect based on role
-        if (user.role === "admin") {
+        if (user.role === "admin" && user.auth === true) {
           router.push("/admin");
-        } else if (user.role === "user") {
+        } 
+        else if (user.role === "admin" && user.auth === false) {
+          router.push("/access-denied")
+        }
+        else if (user.role === "user") {
           router.push("/");
         } else {
           router.push("/");

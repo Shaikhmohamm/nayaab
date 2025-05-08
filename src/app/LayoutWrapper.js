@@ -19,7 +19,7 @@ export default function LayoutWrapper({ children }) {
   if (!isMounted) return null;
 
   // Define routes where NavBar should be hidden
-  const hideNavBarRoutes = ["/register", "/login"];
+  const hideNavBarRoutes = ["/register", "/login", "/access-denied"];
 
   // Check if the current route is an admin page
   const isAdminPage = pathname.startsWith("/admin");
