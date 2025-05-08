@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AdminNav from "@/components/AdminNav";
-import AccessDenied from "@/components/AccessDenied";
 import axios from "axios";
 
 const AdminPage = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const verifyAdmin = async () => {
@@ -16,16 +16,24 @@ const AdminPage = () => {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/me`, {
           withCredentials: true,
         });
-        setUser(res.data.user);
+        const userData = res.data.user;
+
+        if (!userData || !userData.isAdmin) {
+          // 👉 redirect to /access-denied if not admin
+          router.push("/access-denied?reason=not-authorized");
+        } else {
+          setUser(userData);
+        }
       } catch (error) {
-        setUser(null);
+        // 👉 redirect if API call fails (unauthorized or error)
+        router.push("/access-denied?reason=session-expired");
       } finally {
         setLoading(false);
       }
     };
 
     verifyAdmin();
-  }, []);
+  }, [router]);
 
   if (loading) {
     return (
@@ -33,11 +41,6 @@ const AdminPage = () => {
         <p className="text-lg font-semibold">Checking credentials...</p>
       </div>
     );
-  }
-
-  // If no user or user is not admin, show AccessDenied page
-  if (!user || !user.isAdmin) {
-    return <AccessDenied />;
   }
 
   return (
