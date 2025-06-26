@@ -19,13 +19,11 @@ const AdminPage = () => {
         const userData = res.data.user;
 
         if (!userData || !userData.isAdmin) {
-          // 👉 redirect to /access-denied if not admin
           router.push("/access-denied?reason=not-authorized");
         } else {
           setUser(userData);
         }
       } catch (error) {
-        // 👉 redirect if API call fails (unauthorized or error)
         router.push("/access-denied?reason=session-expired");
       } finally {
         setLoading(false);
@@ -37,8 +35,10 @@ const AdminPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center">
-        <p className="text-lg font-semibold">Checking credentials...</p>
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <p className="text-base sm:text-lg font-semibold text-center">
+          Checking credentials...
+        </p>
       </div>
     );
   }
@@ -46,8 +46,13 @@ const AdminPage = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <AdminNav />
-      <div className="flex justify-center items-center min-h-screen">
-        <h2 className="text-2xl font-bold">Welcome to Admin Dashboard</h2>
+      <div className="flex flex-col items-center justify-center px-4 py-10 sm:py-20">
+        <h2 className="text-xl sm:text-3xl font-bold text-center text-gray-800">
+          Welcome to Admin Dashboard
+        </h2>
+        <p className="mt-2 text-center text-sm sm:text-base text-gray-600">
+          You are logged in as: <span className="font-medium">{user?.email}</span>
+        </p>
       </div>
     </div>
   );
