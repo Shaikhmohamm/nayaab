@@ -6,10 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import AdminNav from "@/components/AdminNav";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const AddProductPage = () => {
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [selectedFileNames, setSelectedFileNames] = useState([]);
+  const fileInputRef = useRef(null);
 
   const formik = useFormik({
     initialValues: {
@@ -20,7 +24,7 @@ const AddProductPage = () => {
       images: [],
       stock: 10,
       isFeatured: false,
-      discount: 0
+      discount: 0,
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Product name is required"),
@@ -29,7 +33,7 @@ const AddProductPage = () => {
       category: Yup.string().required("Category is required"),
       images: Yup.array().min(1, "Please upload at least one image"),
       stock: Yup.number().min(1, "Stock must be at least 1").required("Stock is required"),
-      discount: Yup.number().min(0, "Discount must be 0 or more").max(100, "Discount can't exceed 100")
+      discount: Yup.number().min(0, "Discount must be 0 or more").max(100, "Discount can't exceed 100"),
     }),
     onSubmit: async (values, { resetForm }) => {
       setLoading(true);
@@ -39,44 +43,67 @@ const AddProductPage = () => {
           price: Number(values.price),
           stock: Number(values.stock),
           discount: Number(values.discount),
-          isFeatured: values.isFeatured === "true"
+          isFeatured: values.isFeatured === "true",
         };
 
         await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/add`, formattedData, {
-          withCredentials: true
+          withCredentials: true,
         });
 
         alert("Product added successfully!");
         resetForm();
+        setSelectedFileNames([]);
+        if (fileInputRef.current) fileInputRef.current.value = null;
       } catch (error) {
         console.error("Error adding product:", error);
         alert("Failed to add product. Please try again.");
       } finally {
         setLoading(false);
       }
-    }
+    },
   });
 
   const handleFileChange = async (e) => {
     const files = e.target.files;
-    const urls = [...formik.values.images]; // keep existing images
+    const urls = [...formik.values.images];
+    const names = [];
+
+    if (!files.length) return;
+
+    setUploading(true);
+    setUploadProgress(0);
+
     try {
       for (const file of files) {
+        names.push(file.name);
+
         const formData = new FormData();
         formData.append("file", file);
         formData.append("upload_preset", "nayaab_img");
 
         const res = await axios.post(
           `https://api.cloudinary.com/v1_1/dwz1yinjo/image/upload`,
-          formData
+          formData,
+          {
+            onUploadProgress: (event) => {
+              const progress = Math.round((event.loaded * 100) / event.total);
+              setUploadProgress(progress);
+            },
+          }
         );
+
         urls.push(res.data.secure_url);
       }
+
       formik.setFieldValue("images", urls);
-      alert("Images uploaded successfully!");
+      setSelectedFileNames(names);
     } catch (err) {
-      console.error("Cloudinary upload error:", err.response ? err.response.data : err);
+      console.error("Upload failed:", err);
       alert("Image upload failed");
+    } finally {
+      setUploading(false);
+      setUploadProgress(0);
+      if (fileInputRef.current) fileInputRef.current.value = null;
     }
   };
 
@@ -120,18 +147,39 @@ const AddProductPage = () => {
           </div>
 
           <div>
-            <label htmlFor="imageFile" className="block text-sm font-medium mb-1">
-              Upload Images
-            </label>
-            <Input
+          <label
+  htmlFor="imageFile"
+  className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer"
+>
+  📤 Choose Images
+</label>
+            <input
               id="imageFile"
               type="file"
               name="imageFile"
+              ref={fileInputRef}
               onChange={handleFileChange}
               multiple
-              className="border p-2 rounded-md cursor-pointer"
+              className="hidden"
             />
             <p className="text-xs text-gray-500 mt-1">You can upload multiple images (JPEG, PNG, etc.)</p>
+
+            {selectedFileNames.length > 0 && (
+              <ul className="mt-2 text-sm text-gray-700 space-y-1">
+                {selectedFileNames.map((name, index) => (
+                  <li key={index}>📄 {name}</li>
+                ))}
+              </ul>
+            )}
+
+            {uploading && (
+              <div className="mt-3 w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div
+                  className="bg-blue-500 h-full transition-all duration-300"
+                  style={{ width: `${uploadProgress}%` }}
+                ></div>
+              </div>
+            )}
 
             {formik.touched.images && formik.errors.images && (
               <div className="text-red-500 text-sm mt-1">{formik.errors.images}</div>
@@ -188,7 +236,11 @@ const AddProductPage = () => {
             </select>
           </div>
 
-          <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white" disabled={loading}>
+          <Button
+            type="submit"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+            disabled={loading}
+          >
             {loading ? "Adding..." : "Add Product"}
           </Button>
         </form>
