@@ -6,8 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 
+const PRODUCTS_PER_PAGE = 4;
+
 const Bestseller = () => {
   const [bestsellers, setBestsellers] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,15 +26,20 @@ const Bestseller = () => {
     fetchProducts();
   }, []);
 
+  const handleViewMore = () => {
+    setVisibleCount((prev) => prev + PRODUCTS_PER_PAGE);
+  };
+
+  const visibleProducts = bestsellers.slice(0, visibleCount);
+
   return (
     <section className="md:py-12 px-4 sm:px-8 lg:px-16">
       <h2 className="text-2xl font-semibold my-2 md:mb-8 md:ml-2">Trending</h2>
 
       <div className="flex flex-row gap-6 overflow-x-auto md:grid md:grid-cols-3 xl:grid-cols-4 items-center">
-        {bestsellers.map((product) => (
+        {visibleProducts.map((product) => (
           <Link href={`/product/${product._id}`} key={product._id} className="min-w-[200px]">
             <Card
-              key={product._id}
               className="rounded-2xl min-w-[200px] hover:border-white hover:shadow-xl transition duration-300"
             >
               <CardHeader className="p-1">
@@ -63,6 +71,16 @@ const Bestseller = () => {
         ))}
       </div>
 
+      {visibleCount < bestsellers.length && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={handleViewMore}
+            className="px-6 py-2 border border-gray-400 text-gray-700 rounded hover:bg-black hover:text-white transition"
+          >
+            View More
+          </button>
+        </div>
+      )}
     </section>
   );
 };

@@ -147,12 +147,12 @@ const AddProductPage = () => {
           </div>
 
           <div>
-          <label
-  htmlFor="imageFile"
-  className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer"
->
-  📤 Choose Images
-</label>
+            <label
+              htmlFor="imageFile"
+              className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer"
+            >
+              📤 Choose Images
+            </label>
             <input
               id="imageFile"
               type="file"
